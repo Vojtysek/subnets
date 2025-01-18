@@ -19,6 +19,7 @@ type Subnet = {
   subnetMask: string;
   baseRange: string;
   lastRange: string;
+  router: string;
   totalHosts: number;
   usableHosts: number;
 };
@@ -69,6 +70,7 @@ class SubnetCalculator {
         subnetMask: subnetMask.toString(),
         baseRange: this.numberToIP(networkAddress),
         lastRange: this.numberToIP(broadcastAddress),
+        router: this.numberToIP(networkAddress + 1),
         totalHosts: subnetSize,
         usableHosts: subnetSize - 2,
       };
@@ -134,12 +136,13 @@ export default function Page() {
           <TableCaption>Subnets</TableCaption>
           <TableHeader>
             <TableRow>
-              <TableHead>Network Address</TableHead>
-              <TableHead>Subnet Mask</TableHead>
-              <TableHead>First IP (Router)</TableHead>
-              <TableHead>Last IP (BroadCast)</TableHead>
-              <TableHead>Total Hosts</TableHead>
-              <TableHead>Usable Hosts</TableHead>
+              <TableHead>Síť</TableHead>
+              <TableHead>Maska</TableHead>
+              <TableHead>Od</TableHead>
+              <TableHead>Do</TableHead>
+              <TableHead>Router</TableHead>
+              <TableHead>Celkový počet hostů</TableHead>
+              <TableHead>Počet použitelných hostů</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -149,6 +152,7 @@ export default function Page() {
                 <TableCell>{subnet.subnetMask}</TableCell>
                 <TableCell>{subnet.baseRange}</TableCell>
                 <TableCell>{subnet.lastRange}</TableCell>
+                <TableCell>{subnet.router}</TableCell>
                 <TableCell>{subnet.totalHosts}</TableCell>
                 <TableCell>{subnet.usableHosts}</TableCell>
               </TableRow>
@@ -160,7 +164,7 @@ export default function Page() {
             navigator.clipboard.writeText(
               subnets
                 .map((subnet) => {
-                  return `Síť: ${subnet.networkAddress}\nMaska: ${subnet.subnetMask}\nRozsah: ${subnet.networkAddress} - ${subnet.lastRange}\nRouter: ${subnet.baseRange+1}\nCelkový počet hostů: ${subnet.totalHosts}\nPočet použitelných hostů: ${subnet.usableHosts}\n`;
+                  return `Síť: ${subnet.networkAddress}\nMaska: ${subnet.subnetMask}\nRozsah: ${subnet.networkAddress} - ${subnet.lastRange}\nRouter: ${subnet.router}\nCelkový počet hostů: ${subnet.totalHosts}\nPočet použitelných hostů: ${subnet.usableHosts}\n`;
                 })
                 .join("\n")
             )
