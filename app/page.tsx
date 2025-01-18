@@ -184,7 +184,7 @@ export default function Page() {
                 navigator.clipboard.writeText(
                   subnets
                     .map((subnet) => {
-                      return `Sieť: ${subnet.networkAddress}\nMaska: ${subnet.subnetMask}\nRozsah: ${subnet.networkAddress} - ${subnet.lastRange}\nSmerovač: ${subnet.router}\nCelkový počet hostov: ${subnet.totalHosts}\nPočet použiteľných hostov: ${subnet.usableHosts}\n`;
+                      return `Sieť: ${subnet.networkAddress}\nMaska: ${subnet.subnetMask}\nRozsah: ${subnet.networkAddress} - ${subnet.lastRange}\nRouter: ${subnet.router}\nCelkový počet hostov: ${subnet.totalHosts}\nPočet použiteľných hostov: ${subnet.usableHosts}\n`;
                     })
                     .join("\n")
                 )
