@@ -58,7 +58,7 @@ class SubnetCalculator {
     const subnets: Subnet[] = [];
     let currentIP = this.ipToNumber(this.baseIP);
 
-    requiredHosts.forEach((hosts, index) => {
+    requiredHosts.forEach((hosts) => {
       const requiredBits = this.calculateRequiredBits(hosts);
       const subnetMask = 32 - requiredBits;
       const subnetSize = 1 << requiredBits;
@@ -97,7 +97,7 @@ export default function Page() {
   const [baseIP, setBaseIP] = useState<string>("");
   const [globalMask, setGlobalMask] = useState<number>(0);
   const [hosts, setHosts] = useState<string>("");
-  const [requiredHosts, setRequiredHosts] = useState<number[]>([]);
+  const [_, setRequiredHosts] = useState<number[]>([]);
   const [error, setError] = useState<string>("");
 
   return (
