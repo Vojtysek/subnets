@@ -69,7 +69,7 @@ class SubnetCalculator {
       const subnet: Subnet = {
         networkAddress: this.numberToIP(networkAddress),
         subnetMask: subnetMask.toString(),
-        firstIP: this.numberToIP(networkAddress),
+        firstIP: this.numberToIP(networkAddress)+1,
         lastIP: this.numberToIP(broadcastAddress),
         internalRouterIP: this.numberToIP(networkAddress + 2),
         externalRouterIP: this.numberToIP(networkAddress + 1),
@@ -85,12 +85,6 @@ class SubnetCalculator {
     return subnets;
   }
 }
-
-/*
-const subnets = new SubnetCalculator("145.184.128.0", 18).calculateSubnets([
-  2000, 2000, 2000, 1000, 1000, 1000, 250, 250,
-]);
-*/
 
 export default function Page() {
   const [subnets, setSubnets] = useState<Subnet[]>([]);
@@ -147,11 +141,9 @@ export default function Page() {
             <TableRow>
               <TableHead>Network Address</TableHead>
               <TableHead>Subnet Mask</TableHead>
-              <TableHead>First IP</TableHead>
-              <TableHead>Last IP</TableHead>
+              <TableHead>First IP (Router)</TableHead>
+              <TableHead>Last IP (BroadCast)</TableHead>
               <TableHead>Internal Router IP</TableHead>
-              <TableHead>External Router IP</TableHead>
-              <TableHead>Broadcast Address</TableHead>
               <TableHead>Total Hosts</TableHead>
               <TableHead>Usable Hosts</TableHead>
             </TableRow>
