@@ -11,6 +11,7 @@ import {
   TableCaption,
   TableHeader,
 } from "@/components/ui/table";
+import { Clipboard } from "lucide-react";
 import { useState } from "react";
 
 type Subnet = {
@@ -69,7 +70,7 @@ class SubnetCalculator {
       const subnet: Subnet = {
         networkAddress: this.numberToIP(networkAddress),
         subnetMask: subnetMask.toString(),
-        firstIP: this.numberToIP(networkAddress)+1,
+        firstIP: this.numberToIP(networkAddress) + 1,
         lastIP: this.numberToIP(broadcastAddress),
         internalRouterIP: this.numberToIP(networkAddress + 2),
         externalRouterIP: this.numberToIP(networkAddress + 1),
@@ -155,8 +156,6 @@ export default function Page() {
                 <TableCell>{subnet.subnetMask}</TableCell>
                 <TableCell>{subnet.firstIP}</TableCell>
                 <TableCell>{subnet.lastIP}</TableCell>
-                <TableCell>{subnet.internalRouterIP}</TableCell>
-                <TableCell>{subnet.externalRouterIP}</TableCell>
                 <TableCell>{subnet.broadcastAddress}</TableCell>
                 <TableCell>{subnet.totalHosts}</TableCell>
                 <TableCell>{subnet.usableHosts}</TableCell>
@@ -164,6 +163,17 @@ export default function Page() {
             ))}
           </TableBody>
         </Table>
+        <Clipboard
+          onClick={() =>
+            navigator.clipboard.writeText(
+              subnets
+                .map((subnet) => {
+                  return `Síť: ${subnet.networkAddress}\nMaska: ${subnet.subnetMask}\nRouter: ${subnet.firstIP}\nBroadcast: ${subnet.lastIP}\nTotal Hosts: ${subnet.totalHosts}\nUsable Hosts: ${subnet.usableHosts}\n\n`;
+                })
+                .join("")
+            )
+          }
+        />
       </div>
     </div>
   );
