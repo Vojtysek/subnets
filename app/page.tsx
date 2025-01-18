@@ -17,11 +17,8 @@ import { useState } from "react";
 type Subnet = {
   networkAddress: string;
   subnetMask: string;
-  firstIP: string;
-  lastIP: string;
-  internalRouterIP: string;
-  externalRouterIP: string;
-  broadcastAddress: string;
+  baseRange: string;
+  lastRange: string;
   totalHosts: number;
   usableHosts: number;
 };
@@ -70,11 +67,8 @@ class SubnetCalculator {
       const subnet: Subnet = {
         networkAddress: this.numberToIP(networkAddress),
         subnetMask: subnetMask.toString(),
-        firstIP: this.numberToIP(networkAddress) + 1,
-        lastIP: this.numberToIP(broadcastAddress),
-        internalRouterIP: this.numberToIP(networkAddress + 2),
-        externalRouterIP: this.numberToIP(networkAddress + 1),
-        broadcastAddress: this.numberToIP(broadcastAddress),
+        baseRange: this.numberToIP(networkAddress),
+        lastRange: this.numberToIP(broadcastAddress),
         totalHosts: subnetSize,
         usableHosts: subnetSize - 2,
       };
@@ -144,7 +138,6 @@ export default function Page() {
               <TableHead>Subnet Mask</TableHead>
               <TableHead>First IP (Router)</TableHead>
               <TableHead>Last IP (BroadCast)</TableHead>
-              <TableHead>Internal Router IP</TableHead>
               <TableHead>Total Hosts</TableHead>
               <TableHead>Usable Hosts</TableHead>
             </TableRow>
@@ -154,9 +147,8 @@ export default function Page() {
               <TableRow key={index}>
                 <TableCell>{subnet.networkAddress}</TableCell>
                 <TableCell>{subnet.subnetMask}</TableCell>
-                <TableCell>{subnet.firstIP}</TableCell>
-                <TableCell>{subnet.lastIP}</TableCell>
-                <TableCell>{subnet.broadcastAddress}</TableCell>
+                <TableCell>{subnet.baseRange}</TableCell>
+                <TableCell>{subnet.lastRange}</TableCell>
                 <TableCell>{subnet.totalHosts}</TableCell>
                 <TableCell>{subnet.usableHosts}</TableCell>
               </TableRow>
@@ -168,9 +160,9 @@ export default function Page() {
             navigator.clipboard.writeText(
               subnets
                 .map((subnet) => {
-                  return `Síť: ${subnet.networkAddress}\nMaska: ${subnet.subnetMask}\nRouter: ${subnet.firstIP}\nBroadcast: ${subnet.lastIP}\nTotal Hosts: ${subnet.totalHosts}\nUsable Hosts: ${subnet.usableHosts}\n\n`;
+                  return `Síť: ${subnet.networkAddress}\nMaska: ${subnet.subnetMask}\nRozsah: ${subnet.networkAddress} - ${subnet.lastRange}\nRouter: ${subnet.baseRange}\nCelkový počet hostů: ${subnet.totalHosts}\nPočet použitelných hostů: ${subnet.usableHosts}\n`;
                 })
-                .join("")
+                .join("\n")
             )
           }
         />
