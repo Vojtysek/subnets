@@ -6,13 +6,11 @@ import {
   Table,
   TableHead,
   TableCell,
-  TableFooter,
   TableRow,
   TableBody,
   TableCaption,
   TableHeader,
 } from "@/components/ui/table";
-import { SeparatorHorizontal } from "lucide-react";
 import { useState } from "react";
 
 type Subnet = {
