@@ -160,7 +160,7 @@ export default function Page() {
             navigator.clipboard.writeText(
               subnets
                 .map((subnet) => {
-                  return `Síť: ${subnet.networkAddress}\nMaska: ${subnet.subnetMask}\nRozsah: ${subnet.networkAddress} - ${subnet.lastRange}\nRouter: ${subnet.baseRange}\nCelkový počet hostů: ${subnet.totalHosts}\nPočet použitelných hostů: ${subnet.usableHosts}\n`;
+                  return `Síť: ${subnet.networkAddress}\nMaska: ${subnet.subnetMask}\nRozsah: ${subnet.networkAddress} - ${subnet.lastRange}\nRouter: ${subnet.baseRange+1}\nCelkový počet hostů: ${subnet.totalHosts}\nPočet použitelných hostů: ${subnet.usableHosts}\n`;
                 })
                 .join("\n")
             )
