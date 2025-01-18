@@ -159,17 +159,39 @@ export default function Page() {
             ))}
           </TableBody>
         </Table>
-        <Clipboard
-          onClick={() =>
-            navigator.clipboard.writeText(
-              subnets
-                .map((subnet) => {
-                  return `Síť: ${subnet.networkAddress}\nMaska: ${subnet.subnetMask}\nRozsah: ${subnet.networkAddress} - ${subnet.lastRange}\nRouter: ${subnet.router}\nCelkový počet hostů: ${subnet.totalHosts}\nPočet použitelných hostů: ${subnet.usableHosts}\n`;
-                })
-                .join("\n")
-            )
-          }
-        />
+        <div className=" flex flex-row gap-24">
+          <div className="flex gap-4">
+            Česky
+            <Clipboard
+              className="cursor-pointer hover:scale-110"
+              onClick={() =>
+                navigator.clipboard.writeText(
+                  subnets
+                    .map((subnet) => {
+                      return `Síť: ${subnet.networkAddress}\nMaska: ${subnet.subnetMask}\nRozsah: ${subnet.networkAddress} - ${subnet.lastRange}\nRouter: ${subnet.router}\nCelkový počet hostů: ${subnet.totalHosts}\nPočet použitelných hostů: ${subnet.usableHosts}\n`;
+                    })
+                    .join("\n")
+                )
+              }
+            />
+          </div>
+
+          <div className="flex gap-4">
+            Slovensky
+            <Clipboard
+              className="cursor-pointer hover:scale-110"
+              onClick={() =>
+                navigator.clipboard.writeText(
+                  subnets
+                    .map((subnet) => {
+                      return `Sieť: ${subnet.networkAddress}\nMaska: ${subnet.subnetMask}\nRozsah: ${subnet.networkAddress} - ${subnet.lastRange}\nSmerovač: ${subnet.router}\nCelkový počet hostov: ${subnet.totalHosts}\nPočet použiteľných hostov: ${subnet.usableHosts}\n`;
+                    })
+                    .join("\n")
+                )
+              }
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
