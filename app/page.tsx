@@ -97,7 +97,6 @@ export default function Page() {
   const [baseIP, setBaseIP] = useState<string>("");
   const [globalMask, setGlobalMask] = useState<number>(0);
   const [hosts, setHosts] = useState<string>("");
-  const [_, setRequiredHosts] = useState<number[]>([]);
   const [error, setError] = useState<string>("");
 
   return (
@@ -131,7 +130,6 @@ export default function Page() {
               setError("Invalid hosts");
               return;
             }
-            setRequiredHosts(hostsArray);
             const subnets = new SubnetCalculator(
               baseIP,
               globalMask
