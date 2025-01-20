@@ -16,6 +16,7 @@ export default function PageCMD() {
       src="/nameservers.png"
       width={500}
       height={500}
+      key={0}
     />,
     <Image
       className="w-fit border"
@@ -23,6 +24,7 @@ export default function PageCMD() {
       src="/tracert.png"
       width={500}
       height={500}
+      key={1}
     />,
     <Image
       alt="nslookup"
@@ -30,6 +32,7 @@ export default function PageCMD() {
       src="/nslookup.png"
       width={500}
       height={500}
+      key={2}
     />,
     <Image
       className="w-fit border"
@@ -37,15 +40,14 @@ export default function PageCMD() {
       src="/nslookup_soa.png"
       width={500}
       height={500}
+      key={3}
     />,
   ];
 
   return (
     <div className="w-screen h-screen flex flex-col justify-center items-center overflow-auto bg-[#242424] text-black">
       <div className="w-fit my-12 gap-12 place-items-center grid grid-cols-1">
-        {/* image gallery */}
-
-        <Carousel className="w-1/2">
+        <Carousel className="w-1/2b">
           <CarouselContent>
             {images.map((image, index) => (
               <CarouselItem key={index}>
